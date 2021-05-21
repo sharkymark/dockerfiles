@@ -27,11 +27,17 @@ workspace:
           command: |
             ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
             REPO_1_PATH=$HOME/dockerfiles
+            REPO_2_PATH=$HOME/flask-redis-docker-compose
             if [ -d $REPO_1_PATH ]; then
               echo 'dockerfiles repo already exists - skip clone'
             else
               git clone git@github.com:mtm20176/dockerfiles.git 
-            fi   
+            fi 
+            if [ -d $REPO_2_PATH ]; then
+              echo 'flask redis repo already exists - skip clone'
+            else
+              git clone git@github.com:mtm20176/flask-redis-docker-compose.git 
+            fi 
         - name: "install docker-compose"
           directory: /home/coder/
           shell: /bin/bash
