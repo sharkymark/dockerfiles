@@ -4,15 +4,15 @@ workspace:
   specs:
     kubernetes:
       image:
-        value: index.docker.io/codercom/enterprise-base:ubuntu
+        value: index.docker.io/codercom/enterprise-base:arch
       container-based-vm:
         value: true
       cpu: 
-        value: 2
+        value: 3
       memory:
-        value: 2 
+        value: 3 
       disk:
-        value: 10
+        value: 20
       gpu-count:
         value: 0
       labels:
@@ -56,7 +56,11 @@ workspace:
           command: sudo apt install vim              
   dev-urls:
     value:
-      - name: fifthsterapp
-        port: 3000
+      - name: flaskredis
+        port: 8000
         scheme: http
         access: org
+      - name: railsapi
+        port: 80
+        scheme: http
+        access: org        
