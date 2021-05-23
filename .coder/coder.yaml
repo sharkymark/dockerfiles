@@ -64,7 +64,7 @@ workspace:
   dev-urls:
     value:
       - name: flaskredis
-        port: 8000
+        port: 5000
         scheme: http
         access: org
       - name: railsapi
