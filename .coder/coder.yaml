@@ -24,6 +24,7 @@ workspace:
         - name: "set ssh keys and clone and build (dependencies) for dockerfiles project"
           directory: /home/coder/
           shell: /bin/bash
+          continue-on-error: true           
           command: |
             ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
             REPO_1_PATH=$HOME/dockerfiles
@@ -42,18 +43,24 @@ workspace:
           directory: /home/coder/
           shell: /bin/bash
           command: |
+            continue-on-error: true           
             sudo curl -L "https://github.com/docker/compose/releases/download/1.28.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-            sudo chmod +x /usr/local/bin/docker-compose            
-        - name: "install fzf fuzzy find"
+            sudo chmod +x /usr/local/bin/docker-compose           
+        - name: "install fzf fuzzy find and vim editor"
           directory: /home/coder/
           shell: /bin/bash
           command: |
-            sudo apt update
-            sudo apt install fzf
-        - name: "install vim editor"
-          directory: /home/coder/
-          shell: /bin/bash
-          command: sudo apt install vim              
+            continue-on-error: true
+            if [ -f "/etc/arch-release" ]; then
+              echo "Arch Linux"
+              sudo pacman -S fzf --noconfirm
+              sudo pacman -S vim --noconfirm
+            elif [ -f "/etc/lsb-release" ]; then
+              echo "Ubuntu" 
+              sudo apt update
+              sudo apt install fzf
+              sudo apt install vim
+            fi             
   dev-urls:
     value:
       - name: flaskredis
