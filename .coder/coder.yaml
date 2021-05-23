@@ -8,11 +8,11 @@ workspace:
       container-based-vm:
         value: true
       cpu: 
-        value: 3
+        value: 2
       memory:
-        value: 3 
+        value: 2 
       disk:
-        value: 20
+        value: 15
       gpu-count:
         value: 0
       labels:
