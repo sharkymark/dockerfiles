@@ -1,0 +1,4 @@
+# install VS Code extensions from the image into code-server
+
+/var/tmp/coder/code-server/bin/code-server --install-extension /vsix/ms-toolsai.jupyter.2020.12.1.vsix
+/var/tmp/coder/code-server/bin/code-server --install-extension /vsix/dongli.python-preview-0.0.4.vsix 
