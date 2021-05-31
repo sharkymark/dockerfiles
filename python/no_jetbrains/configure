@@ -21,6 +21,8 @@ sudo pip3 install seaborn
 sudo pip3 install statsmodels
 sudo pip3 install lightgbm
 sudo pip3 install shap
+sudo pip3 install pylint
+sudo pip3 install debugpy
 
 # clone repo
 ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
