@@ -23,6 +23,8 @@ sudo pip3 install lightgbm
 sudo pip3 install shap
 sudo pip3 install pylint
 sudo pip3 install debugpy
+sudo pip3 install pytorch
+sudo pip3 install tensorflow
 
 # clone repo
 ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
