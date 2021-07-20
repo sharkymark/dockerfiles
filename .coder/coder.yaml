@@ -17,7 +17,7 @@ workspace:
         value: 0
       labels:
         value:   
-          com.coder.custom.chargeback: "container_team"
+          com.coder.custom.chargeback: "container_team_b"
   configure:
     start:
       value:
