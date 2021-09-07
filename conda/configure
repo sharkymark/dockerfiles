@@ -1,0 +1,9 @@
+# install Python VS Code extension into code-server
+
+SERVICE_URL=https://open-vsx.org/vscode/gallery ITEM_URL=https://open-vsx.org/vscode/item /var/tmp/coder/code-server/bin/code-server --install-extension ms-python.anaconda-extension-pack
+
+# conda install packages
+
+conda install pandas
+conda install numpy
+conda install flask
