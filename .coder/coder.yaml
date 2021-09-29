@@ -58,8 +58,8 @@ workspace:
             elif [ -f "/etc/lsb-release" ]; then
               echo "Ubuntu" 
               sudo apt update
-              sudo apt install fzf
-              sudo apt install vim
+              sudo apt install -y fzf
+              sudo apt install -y vim
             fi             
   dev-urls:
     value:
