@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# install VS Code extension into code-server
+SERVICE_URL=https://open-vsx.org/vscode/gallery ITEM_URL=https://open-vsx.org/vscode/item /var/tmp/coder/code-server/bin/code-server --install-extension ms-python.python
+
+# setup pgAdmin the -E is key to passing environment variables to the script process
+
+sudo -E /usr/pgadmin4/bin/setup-web.sh --yes
