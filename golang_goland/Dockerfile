@@ -3,8 +3,8 @@ FROM codercom/enterprise-multieditor:ubuntu
 # Run everything as root
 USER root
 
-# Install go1.15
-RUN curl -L "https://dl.google.com/go/go1.16.4.linux-amd64.tar.gz" | tar -C /usr/local -xzvf -
+# Install go1.17.1
+RUN curl -L "https://dl.google.com/go/go1.17.1.linux-amd64.tar.gz" | tar -C /usr/local -xzvf -
 
 # Setup go env vars
 ENV GOROOT /usr/local/go
