@@ -3,6 +3,13 @@ FROM codercom/enterprise-multieditor:ubuntu
 # Run everything as root
 USER root
 
+# Install php interpreter and CGI
+
+RUN apt-get update && \
+    DEBIAN_FRONTEND="noninteractive" apt-get install --yes \
+      php \
+      php7.4-cgi
+
 # Install PHP Storm.
 RUN mkdir -p /opt/ps
 RUN curl -L "https://download.jetbrains.com/product?code=PS&latest&distribution=linux" | tar -C /opt/ps --strip-components 1 -xzvf -
