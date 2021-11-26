@@ -8,7 +8,10 @@ USER root
 RUN apt-get update && \
     DEBIAN_FRONTEND="noninteractive" apt-get install --yes \
       php \
-      php7.4-cgi
+      php7.4-cgi \
+      sqlite3 \
+      libsqlite3-dev \
+      php7.4-sqlite3      
 
 # Install PHP Storm.
 RUN mkdir -p /opt/ps
