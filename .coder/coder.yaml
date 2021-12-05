@@ -12,7 +12,7 @@ workspace:
       memory:
         value: 8 
       disk:
-        value: 30 
+        value: 40 
       gpu-count:
         value: 0
       labels:
