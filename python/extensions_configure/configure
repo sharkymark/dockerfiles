@@ -1,0 +1,25 @@
+# install VS Code extension options
+# 1. install from code-server's marketplace
+# 2. install from open-vsx's marketplace
+# 3. include an extension in the docker image, copy to a new folder, and install
+#
+# OPTIONAL: you can let developers do steps 1 and 2 within a dotfiles repo or added to the personalize script in the /home/coder folder
+#
+
+# IMPORTANT: be sure to chmod this configure file so it can be executed - chmod +x configure
+# https://coder.com/docs/coder/latest/images/configure#step-1-create-the-configure-file
+
+
+# copy the vsix file in dockerfile and install from that folder
+/var/tmp/coder/code-server/bin/code-server --install-extension /vsix/ms-toolsai.jupyter.2020.12.1.vsix --force
+
+# use open-vsx marketplace
+SERVICE_URL=https://open-vsx.org/vscode/gallery ITEM_URL=https://open-vsx.org/vscode/item /var/tmp/coder/code-server/bin/code-server --install-extension ms-python.python --force
+
+# use code-server's marketplace
+/var/tmp/coder/code-server/bin/code-server --install-extension esbenp.prettier-vscode --force
+/var/tmp/coder/code-server/bin/code-server --install-extension ms-python.python --force
+
+# NOTE:
+# if you want to use Microsoft's VS Code marketplace, use local VS Code and SSH to connect to Coder.
+# Microsoft only allows local VS Code to connect to their marketplace.
