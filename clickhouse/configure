@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# start ClickHouse server
+
+sudo ./clickhouse server --daemon
+
+
+
