@@ -46,10 +46,9 @@ RUN chmod +x /tmp/install-ruby.sh && /tmp/install-ruby.sh
 
 RUN gem install bundler
 
-# Install RubyMine editor from JetBrains
+# Install RubyMine IDE from JetBrains
 RUN mkdir -p /opt/rubymine
-ENV RUBYMINE_VERSION=2020.3.2   
-RUN curl -L https://download.jetbrains.com/ruby/RubyMine-${RUBYMINE_VERSION}.tar.gz | tar -C /opt/rubymine --strip-components 1 -xzvf -
+RUN curl -L "https://download.jetbrains.com/product?code=RM&latest&distribution=linux" | tar -C /opt/rubymine --strip-components 1 -xzvf -
 # Add a binary to the PATH that points to the JetBrains startup script
 RUN ln -s /opt/rubymine/bin/rubymine.sh /usr/local/bin/rubymine
 ENV PATH /usr/local/bin:$PATH

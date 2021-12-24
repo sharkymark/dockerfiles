@@ -48,11 +48,8 @@ ENV RBENV_ROOT=/usr/local/rbenv
 
 # install Ruby, bundler, Rails
 
-#RUN bash -l -c "rbenv install 2.6.6; rbenv global 2.6.6; rbenv rehash;"
-#RUN bash -l -c "gem install bundler"
-#RUN bash -l -c "gem install rails -v 5.2.2"
-
 RUN rbenv install 2.6.6
+RUN rbenv install 2.7.0
 RUN rbenv global 2.6.6
 RUN rbenv rehash
 RUN gem install bundler
@@ -62,8 +59,9 @@ RUN gem install rails -v 5.2.2
 # Install RubyMine
 RUN mkdir -p /opt/rubymine
 
-ENV RUBYMINE_VERSION=2020.1.3   
-RUN curl -L https://download.jetbrains.com/ruby/RubyMine-${RUBYMINE_VERSION}.tar.gz | tar -C /opt/rubymine --strip-components 1 -xzvf -
+# latest version
+RUN curl -L "https://download.jetbrains.com/product?code=RM&latest&distribution=linux" | tar -C /opt/rubymine --strip-components 1 -xzvf -
+
 
 
 # Add a binary to the PATH that points to the webstorm startup script

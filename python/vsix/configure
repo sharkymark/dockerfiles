@@ -1,0 +1,3 @@
+
+# install VS Code extensions from the image into code-server
+/var/tmp/coder/code-server/bin/code-server --install-extension /vsix/ms-python.python-2020.10.332292344.vsix
