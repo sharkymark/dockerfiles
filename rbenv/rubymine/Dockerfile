@@ -1,40 +1,18 @@
-FROM ubuntu:20.04
+# 2/26/22 update to leverage Coder images
+
+FROM codercom/enterprise-multieditor:ubuntu
+
+# Run everything as root
+USER root
 
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y \
-    git \
-    bash \
-    curl \
-    sudo \
-    snapd \
-    ssh \
-    autoconf \
-    bison \
-    build-essential \
-    libssl-dev \
-    libyaml-dev \
-    libreadline6-dev \
-    zlib1g-dev \
-    libncurses5-dev \
-    libffi-dev \
-    libgdbm-dev \
     sqlite3 \
     libsqlite3-dev \
     curl \
-    wget \
-    tzdata \
-    nodejs \
-    ca-certificates \
-    openssl \
-    # Packages required for multi-editor support
-    libxtst6 \
-    libxrender1 \
-    libfontconfig1 \
-    libxi6 \
-    libgtk-3-0
-
-
+    libssl-dev \
+    libreadline-dev
 
 
 # clone rbenv and ruby-build
@@ -49,11 +27,11 @@ ENV RBENV_ROOT=/usr/local/rbenv
 # install Ruby, bundler, Rails
 
 RUN rbenv install 2.6.6
-RUN rbenv install 2.7.0
-RUN rbenv global 2.6.6
+RUN rbenv install 2.7.2
+RUN rbenv global 2.7.2
 RUN rbenv rehash
 RUN gem install bundler
-RUN gem install rails -v 5.2.2
+#RUN gem install rails -v 5.2.2
 
 
 # Install RubyMine
@@ -69,10 +47,9 @@ RUN ln -s /opt/rubymine/bin/rubymine.sh /usr/local/bin/rubymine
 
 ENV PATH /usr/local/bin:$PATH
 
+# add Ruby on Rails to image
+RUN gem install rails -v 7.0.2.2
 
-# Add a user `coder` so that you're not developing as the `root` user
-RUN adduser --gecos '' --disabled-password coder && \
-  echo "coder ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/nopasswd
 USER coder
 
 
