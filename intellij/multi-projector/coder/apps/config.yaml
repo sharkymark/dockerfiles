@@ -1,0 +1,35 @@
+apps:
+  - name: IntelliJ #2
+    scheme: http
+    port: 9990
+    icon-path: /coder/apps/intellij.png
+    host: "localhost"
+    working-directory: /home/coder
+    command: /opt/idea/bin/idea.sh
+    args: []    
+    health-check:
+      exec:
+        command: "pgrep"
+        args: ["idea"]
+      http:
+        scheme: "http"
+        host: "localhost"
+        port: 9990
+        path: "/healthz"
+  - name: IntelliJ #3
+    scheme: http
+    port: 9991
+    icon-path: /coder/apps/intellij.png
+    host: "localhost"
+    working-directory: /home/coder
+    command: /opt/idea/bin/idea.sh
+    args: [""]    
+    health-check:
+      exec:
+        command: "pgrep"
+        args: ["projector"]
+      http:
+        scheme: "http"
+        host: "localhost"
+        port: 9991
+        path: "/healthz"
