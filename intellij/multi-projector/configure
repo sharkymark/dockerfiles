@@ -1,0 +1,8 @@
+
+
+# projector configs and properties
+mkdir -p /home/coder/.projector/configs/IntelliJ_2
+mkdir -p /home/coder/.projector/configs/IntelliJ_3
+
+cp /coder/projector-1-idea.properties /home/coder/.projector/configs/IntelliJ_2/idea.properties
+cp /coder/projector-2-idea.properties /home/coder/.projector/configs/IntelliJ_3/idea.properties

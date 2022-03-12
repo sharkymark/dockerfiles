@@ -1,0 +1,22 @@
+# https://github.com/JetBrains/projector-installer#Installation
+# https://github.com/JetBrains/projector-installer/blob/master/COMMANDS.md
+
+# install projector into coder pvc
+pip3 install projector-installer --user
+
+# put projector into path
+cp /coder/.profile $HOME
+source $HOME/.profile
+
+# autoinstall intellij version specifying config name and port
+$HOME/.local/bin/projector --accept-license
+
+PROJECTOR_CONFIG_PATH=$HOME/.projector/configs/IntelliJ_2
+
+if [ -d $PROJECTOR_CONFIG_PATH ]; then
+    echo 'projector has already been configured and IntelliJ IDE downloaded - skip step'
+else
+    $HOME/.local/bin/projector ide autoinstall --config-name IntelliJ_2 --ide-name "IntelliJ IDEA Ultimate 2021.3.2" --port 8997 --use-separate-config
+    $HOME/.local/bin/projector ide autoinstall --config-name IntelliJ_3 --ide-name "IntelliJ IDEA Ultimate 2021.3.2" --port 8998 --use-separate-config
+    $HOME/.local/bin/projector ide autoinstall --config-name IntelliJ_4 --ide-name "IntelliJ IDEA Ultimate 2021.3.2" --port 8999 --use-separate-config  
+fi           
