@@ -1,0 +1,8 @@
+# script run automatically after workspace build and before the personalize script
+# the user is coder (as set in the image)
+
+# install vs code python extension from open-vsx marketplace
+SERVICE_URL=https://open-vsx.org/vscode/gallery ITEM_URL=https://open-vsx.org/vscode/item /var/tmp/coder/code-server/bin/code-server --install-extension ms-python.python
+
+# copy html file to home folder
+cp /coder/apps/index.html $HOME

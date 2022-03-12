@@ -1,0 +1,76 @@
+# /coder/apps/config.yaml
+apps:
+  # Name of application in launcher. Name may consist of alphanumeric
+  # characters, dashes, underscores. Names must begin with an alphanumeric
+  # character. Names must be unique per application. Required.
+  - name: Web server
+    # Application scheme - must be http or https. Required.
+    scheme: http
+    # Application port. Required.
+    port: 8000
+    # Host of the application to use when dialing. Defaults to localhost.
+    # Optional.
+    host: "localhost"
+    # Working directory for the start command. Required.
+    working-directory: /home/coder
+    # File path to icon used in application launcher. Icons should be either
+    # PNG, SVG, or JPG. Required.
+    icon-path: /coder/apps/python-logo.png
+    # Command to start the application. Required.
+    command: python3
+    # Array of arguments for command. Optional.
+    args: ["-m", "http.server"]
+    # Health checks to get running application status. Can use exec or http
+    # health checks to localhost. Optional, but we recommend specifying a
+    # health check. If you don't supply one, then an http request is sent to
+    # the application root path "/".
+    health-check:
+      # Exec commands require an exit code of '0' to report healthy.
+      exec:
+        command: "pgrep"
+        args: ["python3"]
+      http:
+        # Scheme must be "http" or "https". If not specified it inherits
+        # the application scheme. Optional.
+        scheme: "http"
+        # The host to use when dialing the address. If not specified it
+        # inherits the application host. Optional.
+        host: "localhost"
+        # Port to use when dialing the application. If not specified it
+        # inherits the application port. Optional.
+        port: 8000
+        # Path to use for the health check. If not specified defaults to
+        # "/". Optional.
+        path: ""        
+  - name: HTTP server
+    # Application scheme - must be http or https. Required.
+    scheme: http
+    # Application port. Required.
+    port: 8001
+    # Host of the application to use when dialing. Defaults to localhost.
+    # Optional.
+    host: "localhost"
+    # Working directory for the start command. Required.
+    working-directory: /home/coder
+    # File path to icon used in application launcher. Icons should be either
+    # PNG, SVG, or JPG. Required.
+    icon-path: /coder/apps/nodejs-big.png
+    # Command to start the application. Required.
+    command: npx
+    # Array of arguments for command. Optional.
+    args: ["http-server","-p", "8001","-d"]
+    # Health checks to get running application status. Can use exec or http
+    # health checks to localhost. Optional, but we recommend specifying a
+    # health check. If you don't supply one, then an http request is sent to
+    # the application root path "/".
+    health-check:
+      http:
+        # Scheme must be "http" or "https". If not specified it inherits
+        # the application scheme. Optional.
+        scheme: "http"
+        # The host to use when dialing the address. If not specified it
+        # inherits the application host. Optional.
+        host: "localhost"
+        # Port to use when dialing the application. If not specified it
+        # inherits the application port. Optional.
+        port: 8001        
