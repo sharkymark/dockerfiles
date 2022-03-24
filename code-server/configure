@@ -1,0 +1,12 @@
+# https://github.com/coder/code-server/releases
+# the use case is users wanting to run multiple projects within VS Code
+# the code-server (aka Code Web) injected in the workspace can only open 1
+# project no matter how many instances that you open
+
+# create dev URLs for multiple code-server instances
+coder urls create $CODER_WORKSPACE_NAME 8080 --name codeweb2
+coder urls create $CODER_WORKSPACE_NAME 8081 --name codeweb3
+
+# launch code-server on different ports
+/var/tmp/coder/code-server/bin/code-server --host 0.0.0.0 --port 8080 --auth=none &
+/var/tmp/coder/code-server/bin/code-server --host 0.0.0.0 --port 8081 --auth=none &
