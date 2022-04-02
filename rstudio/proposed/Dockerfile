@@ -24,6 +24,7 @@ RUN chown -R coder:coder /var/lib/rstudio-server
 RUN echo "server-pid-file=/tmp/rstudio-server.pid" >> /etc/rstudio/rserver.conf
 RUN echo "server-data-dir=/tmp/rstudio" >> /etc/rstudio/rserver.conf
 RUN echo "www-frame-origin=same" >> /etc/rstudio/rserver.conf
+RUN echo "server-user=coder" >> /etc/rstudio/rserver.conf
 
 # Remove the following line if you do not run Coder on https
 RUN echo "server-add-header=X-Forwarded-Proto: https" >> /etc/rstudio/rserver.conf

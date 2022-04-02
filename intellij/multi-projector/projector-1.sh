@@ -55,8 +55,8 @@ if [ -n "$IDEA_JDK" ] && [ -x "$IDEA_JDK/bin/java" ]; then
 fi
 
 BITS=""
-if [ -z "$JRE" ] && [ -s "${CONFIG_HOME}/JetBrains/IdeaIC2021.3/idea.jdk" ]; then
-  USER_JRE=$(cat "${CONFIG_HOME}/JetBrains/IdeaIC2021.3/idea.jdk")
+if [ -z "$JRE" ] && [ -s "${CONFIG_HOME}/JetBrains/IntelliJIdea2021.3/idea.jdk" ]; then
+  USER_JRE=$(cat "${CONFIG_HOME}/JetBrains/IntelliJIdea2021.3/idea.jdk")
   if [ -x "$USER_JRE/bin/java" ]; then
     JRE="$USER_JRE"
   fi
@@ -114,8 +114,8 @@ else
   # ... [+ <IDE_HOME>.vmoptions (Toolbox) || <config_directory>/<bin_name>.vmoptions]
   if [ -r "${IDE_HOME}.vmoptions" ]; then
     USER_VM_OPTIONS_FILE="${IDE_HOME}.vmoptions"
-  elif [ -r "${CONFIG_HOME}/JetBrains/IdeaIC2021.3/idea${BITS}.vmoptions" ]; then
-    USER_VM_OPTIONS_FILE="${CONFIG_HOME}/JetBrains/IdeaIC2021.3/idea${BITS}.vmoptions"
+  elif [ -r "${CONFIG_HOME}/JetBrains/IntelliJIdea2021.3/idea${BITS}.vmoptions" ]; then
+    USER_VM_OPTIONS_FILE="${CONFIG_HOME}/JetBrains/IntelliJIdea2021.3/idea${BITS}.vmoptions"
   fi
 fi
 
@@ -143,7 +143,7 @@ if [ -n "$IDEA_CLASSPATH" ]; then
 fi
 
 # ---------------------------------------------------------------------
-# Run the IDE.
+# Run the IDE. 
 # ---------------------------------------------------------------------
 IFS="$(printf '\n\t')"
 # shellcheck disable=SC2086
@@ -170,6 +170,6 @@ IFS="$(printf '\n\t')"
 #  "-XX:HeapDumpPath=$HOME/java_error_in_idea_.hprof" \
 #  "-Djb.vmOptionsFile=${USER_VM_OPTIONS_FILE:-${VM_OPTIONS_FILE}}" \
 #  ${IDE_PROPERTIES_PROPERTY} \
-#  -Djava.system.class.loader=com.intellij.util.lang.PathClassLoader -Didea.vendor.name=JetBrains -Didea.paths.selector=IdeaIC2021.3 -Didea.platform.prefix=Idea -Didea.jre.check=true -Dsplash=true \
+#  -Djava.system.class.loader=com.intellij.util.lang.PathClassLoader -Didea.vendor.name=JetBrains -Didea.paths.selector=IntelliJIdea2021.3 -Didea.platform.prefix=Idea -Didea.jre.check=true -Dsplash=true \
 #  com.intellij.idea.Main \
 #  "$@"
