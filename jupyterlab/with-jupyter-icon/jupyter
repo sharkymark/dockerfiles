@@ -1,0 +1,7 @@
+#!/bin/bash
+# Replace all "NotebookApp" settings with ServerApp settings.
+args=${@//LabApp/"ServerApp"}
+# Replace 'notebook' with 'lab' to launch juypter lab
+args=${args/notebook/"lab"}
+
+jupyter.py ${args}

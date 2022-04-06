@@ -1,0 +1,6 @@
+echo 'backup the Coder injected Jupyter icon'
+ICON_DIR=/var/tmp/coder/code-server/plugins/jupyter/out/
+sudo mv $ICON_DIR/jupyter.svg $ICON_DIR/jupyter-notebook.svg
+
+echo 'move the image-added JupyterLab icon and change name to what Coder expects for Jupyter'
+sudo mv /usr/local/bin/jupyterlab.svg $ICON_DIR/jupyter.svg
