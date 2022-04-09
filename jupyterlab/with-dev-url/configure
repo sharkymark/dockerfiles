@@ -1,0 +1,6 @@
+echo 'create dev URL for JupyterLab'
+coder urls create $CODER_WORKSPACE_NAME 8888 --name jupyterlab
+
+
+#echo 'start JupyterLab'
+#nohup jupyter-launcher lab --ip='*' --NotebookApp.token='' --NotebookApp.password='' &
