@@ -14,5 +14,10 @@ RUN pip3 install pandas && \
 COPY ["configure", "/coder/configure"]
 RUN chmod +x /coder/configure
 
+# install supervisord
+RUN apt-get update && apt-get install -y supervisor
+RUN mkdir -p /var/log/supervisor
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
 # change back to the coder user
 USER coder
