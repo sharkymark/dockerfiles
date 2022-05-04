@@ -3,6 +3,8 @@
 # https://github.com/JetBrains/projector-installer#Installation
 # https://github.com/JetBrains/projector-installer/blob/master/COMMANDS.md
 
+PROJECTOR_BINARY=$HOME/.local/bin/projector
+
 # install projector into coder pvc
 if [ -f $PROJECTOR_BINARY ]; then
     echo 'projector has already been installed - check for update'
@@ -26,7 +28,7 @@ if [ -d $PROJECTOR_CONFIG_PATH ]; then
     echo 'projector has already been configured and IntelliJ IDE downloaded - skip step'
 else
     echo 'autoinstalling IntelliJ Ultimate and creating projector config folders to support running multiple IntelliJ IDEs'
-    $HOME/.local/bin/projector ide autoinstall --config-name IntelliJ_2 --ide-name "IntelliJ IDEA Ultimate 2021.3.2" --port 8997 --use-separate-config
-    $HOME/.local/bin/projector ide autoinstall --config-name IntelliJ_3 --ide-name "IntelliJ IDEA Ultimate 2021.3.2" --port 8998 --use-separate-config
-    $HOME/.local/bin/projector ide autoinstall --config-name IntelliJ_4 --ide-name "IntelliJ IDEA Ultimate 2021.3.2" --port 8999 --use-separate-config  
+    $HOME/.local/bin/projector ide autoinstall --config-name IntelliJ_2 --ide-name "IntelliJ IDEA Ultimate 2022.1" --hostname=localhost --port 8997 --use-separate-config
+    $HOME/.local/bin/projector ide autoinstall --config-name IntelliJ_3 --ide-name "IntelliJ IDEA Ultimate 2022.1" --hostname=localhost --port 8998 --use-separate-config
+    $HOME/.local/bin/projector ide autoinstall --config-name IntelliJ_4 --ide-name "IntelliJ IDEA Ultimate 2022.1" --hostname=localhost --port 8999 --use-separate-config  
 fi           

@@ -1,4 +1,4 @@
-FROM marktmilligan/intellij-ultimate:latest
+FROM marktmilligan/intellij-ultimate:2022.1
 
 # Run everything as root
 USER root
