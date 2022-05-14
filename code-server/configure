@@ -4,9 +4,8 @@
 # project no matter how many instances that you open
 
 # create dev URLs for multiple code-server instances
-coder urls create $CODER_WORKSPACE_NAME 8080 --name codeweb2
-coder urls create $CODER_WORKSPACE_NAME 8081 --name codeweb3
+coder urls create $CODER_WORKSPACE_NAME 8080 --name vs-code-2
+coder urls create $CODER_WORKSPACE_NAME 8081 --name vs-code-3
 
-# launch code-server on different ports
-/var/tmp/coder/code-server/bin/code-server --host 0.0.0.0 --port 8080 --auth=none &
-/var/tmp/coder/code-server/bin/code-server --host 0.0.0.0 --port 8081 --auth=none &
+echo 'start supervisord and code-server instances'
+sudo /usr/bin/supervisord
