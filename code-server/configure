@@ -5,7 +5,6 @@
 
 # create dev URLs for multiple code-server instances
 coder urls create $CODER_WORKSPACE_NAME 8080 --name vs-code-2
-coder urls create $CODER_WORKSPACE_NAME 8081 --name vs-code-3
 
 echo 'start supervisord and code-server instances'
 sudo /usr/bin/supervisord
