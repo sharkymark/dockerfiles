@@ -1,6 +1,0 @@
-vs-code-extensions-python.txt
-
-
-https://marketplace.visualstudio.com/items?itemName=ms-python.python
-https://marketplace.visualstudio.com/items?itemName=dongli.python-preview
-https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter
