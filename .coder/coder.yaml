@@ -12,7 +12,7 @@ workspace:
       memory:
         value: 8 
       disk:
-        value: 40 
+        value: 60
       gpu-count:
         value: 0
       labels:
@@ -38,14 +38,7 @@ workspace:
               echo 'flask redis repo already exists - skip clone'
             else
               git clone git@github.com:mtm20176/flask-redis-docker-compose.git 
-            fi 
-        - name: "install docker-compose"
-          directory: /home/coder/
-          shell: /bin/bash
-          command: |
-            continue-on-error: true           
-            sudo curl -L "https://github.com/docker/compose/releases/download/1.28.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-            sudo chmod +x /usr/local/bin/docker-compose           
+            fi
         - name: "install fzf fuzzy find and vim editor"
           directory: /home/coder/
           shell: /bin/bash
