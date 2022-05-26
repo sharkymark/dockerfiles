@@ -15,5 +15,8 @@ else
  sudo service apache2 start
 fi
 
+echo 'create dev URL for pgadmin'
+/var/tmp/coder/coder-cli/coder urls create $CODER_WORKSPACE_NAME 80 --name pgadmin4
 
-
+echo 'start postgres database'
+sudo systemctl start postgresql.services
