@@ -41,9 +41,4 @@ fi
 /home/coder/.projector/configs/IntelliJ/run.sh &
 /home/coder/.projector/configs/IntelliJ_2/run.sh &
 
-export HOME=/home/coder
-
-# install code-server
-curl -fsSL https://code-server.dev/install.sh | sh
-code-server --auth none --port 13337
 
