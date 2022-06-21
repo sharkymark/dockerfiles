@@ -1,0 +1,49 @@
+#!/bin/bash
+
+# https://github.com/JetBrains/projector-installer#Installation
+# https://github.com/JetBrains/projector-installer/blob/master/COMMANDS.md
+
+PROJECTOR_BINARY=/home/coder/.local/bin/projector
+
+# install projector into coder pvc
+if [ -f $PROJECTOR_BINARY ]; then
+    echo 'projector has already been installed - check for update'
+    /home/coder/.local/bin/projector self-update
+else
+    echo 'installing projector'
+    pip3 install projector-installer --user
+fi
+
+# autoinstall intellij version specifying config name and port
+echo 'accept projector license terms'
+/home/coder/.local/bin/projector --accept-license
+
+INTELLIJ_PATH=$HOME/.projector/apps/idea
+
+if [ -d $INTELLIJ_PATH ]; then
+    echo 'intellij IDE has already been copied - skip step'
+else
+    echo 'copying Coder-installed JetBrains IntelliJ IDE into /home/coder'
+    cp -R /opt/idea $HOME/.projector/apps
+fi
+
+PROJECTOR_CONFIG_PATH=$HOME/.projector/configs/IntelliJ
+
+if [ -d $PROJECTOR_CONFIG_PATH ]; then
+    echo 'projector has already been configured - skip step'
+else
+    echo 'creating projector config folders to support running multiple IntelliJ IDEs'
+    $HOME/.local/bin/projector config add IntelliJ $HOME/.projector/apps/idea --port 8997 --hostname=localhost --use-separate-config 
+    $HOME/.local/bin/projector config add IntelliJ_2 $HOME/.projector/apps/idea --port 8998 --hostname=localhost --use-separate-config        
+fi  
+
+# start 2 JetBrains projector-based IntelliJ configs (this allows opening more than one project)
+/home/coder/.projector/configs/IntelliJ/run.sh &
+/home/coder/.projector/configs/IntelliJ_2/run.sh &
+
+export HOME=/home/coder
+
+# install code-server
+curl -fsSL https://code-server.dev/install.sh | sh
+code-server --auth none --port 13337
+

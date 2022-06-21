@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# https://github.com/JetBrains/projector-installer#Installation
+# https://github.com/JetBrains/projector-installer/blob/master/COMMANDS.md
+
+PROJECTOR_BINARY=/home/coder/.local/bin/projector
+
+# install projector into coder pvc
+if [ -f $PROJECTOR_BINARY ]; then
+    echo 'projector has already been installed - check for update'
+    /home/coder/.local/bin/projector self-update
+else
+    echo 'installing projector'
+    pip3 install projector-installer --user
+fi
+
+# autoinstall intellij version specifying config name and port
+echo 'accept projector license terms'
+/home/coder/.local/bin/projector --accept-license
+
+INTELLIJ_PATH=$HOME/.projector/apps/pycharm
+
+if [ -d $INTELLIJ_PATH ]; then
+    echo 'pycharm IDE has already been copied - skip step'
+else
+    echo 'copying Coder-installed JetBrains PyCharm IDE into /home/coder'
+    cp -R /opt/pycharm $HOME/.projector/apps
+fi
+
+PROJECTOR_CONFIG_PATH=$HOME/.projector/configs/Pycharm
+
+if [ -d $PROJECTOR_CONFIG_PATH ]; then
+    echo 'projector has already been configured - skip step'
+else
+    echo 'creating projector config folders to support running multiple PyCharm IDEs'
+    $HOME/.local/bin/projector config add PyCharm $HOME/.projector/apps/pycharm --port 8997 --hostname=localhost --use-separate-config 
+    $HOME/.local/bin/projector config add PyCharm_2 $HOME/.projector/apps/pycharm --port 8998 --hostname=localhost --use-separate-config        
+fi  
+
+# start 2 JetBrains projector-based IntelliJ configs (this allows opening more than one project)
+/home/coder/.projector/configs/PyCharm/run.sh &
+/home/coder/.projector/configs/PyCharm_2/run.sh &
+
+
+

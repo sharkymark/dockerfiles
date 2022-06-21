@@ -15,6 +15,13 @@ RUN DEBIAN_FRONTEND="noninteractive" apt-get update -y && \
     libxi6 \
     libgtk-3-0
 
+# Install pycharm community
+RUN mkdir -p /opt/pycharm
+RUN curl -L "https://download.jetbrains.com/product?code=PCC&latest&distribution=linux" | tar -C /opt/pycharm --strip-components 1 -xzvf -
+
+# Add a binary to the PATH that points to the pycharm startup script.
+RUN ln -s /opt/pycharm/bin/pycharm.sh /usr/bin/pycharm-community.sh
+
 # configure script
 COPY ["configure", "/coder/configure"]
 RUN chmod +x /coder/configure

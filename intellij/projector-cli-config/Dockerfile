@@ -15,6 +15,13 @@ RUN DEBIAN_FRONTEND="noninteractive" apt-get update -y && \
     libxi6 \
     libgtk-3-0
 
+# Install intelliJ
+RUN mkdir -p /opt/idea
+RUN curl -L "https://download.jetbrains.com/product?code=IIC&latest&distribution=linux" | tar -C /opt/idea --strip-components 1 -xzvf -
+
+# Add a binary to the PATH that points to the intellij startup script.
+RUN ln -s /opt/idea/bin/idea.sh /usr/bin/intellij-idea-community
+
 # configure script
 COPY ["configure", "/coder/configure"]
 RUN chmod +x /coder/configure

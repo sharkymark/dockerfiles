@@ -25,4 +25,13 @@ if [ -d $PROJECTOR_CONFIG_PATH ]; then
 else
     echo 'autoinstalling IntelliJ Ultimate and creating projector config folders to support running multiple IntelliJ IDEs'
     $HOME/.local/bin/projector ide autoinstall --config-name IntelliJ --ide-name "IntelliJ IDEA Ultimate 2022.1.2" --hostname=localhost --port 8997 --use-separate-config
-fi           
+fi
+
+export HOME=/home/coder
+
+# install code-server
+curl -fsSL https://code-server.dev/install.sh | sh
+code-server --auth none --port 13337
+
+# start JetBrains projector-based IntelliJ
+/home/coder/.projector/configs/IntelliJ/run.sh
