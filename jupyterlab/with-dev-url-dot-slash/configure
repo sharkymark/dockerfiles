@@ -1,0 +1,9 @@
+#!/bin/bash
+
+echo 'create dev URL for JupyterLab'
+coder urls create $CODER_WORKSPACE_NAME 8888 --name jupyterlab
+
+echo 'start supervisord and JupyterLab'
+sudo /usr/bin/supervisord
+
+
