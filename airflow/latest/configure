@@ -1,0 +1,11 @@
+#!/bin/bash
+
+echo 'create dev URL for Airflow'
+/var/tmp/coder/coder-cli/coder urls create $CODER_WORKSPACE_NAME 8080 --name airflow
+
+echo 'create dev URL for JupyterLab'
+/var/tmp/coder/coder-cli/coder urls create $CODER_WORKSPACE_NAME 8888 --name lab
+
+echo 'start supervisord and Airflow standalone with SQLite3 and scheduler'
+echo 'retrieve password for username: admin from $HOME/airflow/standalone_admin_password.txt'
+sudo /usr/bin/supervisord
