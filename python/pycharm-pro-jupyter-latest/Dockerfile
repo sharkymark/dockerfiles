@@ -3,16 +3,18 @@ FROM codercom/enterprise-multieditor:ubuntu
 # Run everything as root
 USER root
 
-# Install pycharm professional edition
 RUN mkdir -p /opt/pycharm
-RUN curl -L "https://download.jetbrains.com/product?code=PCP&latest&distribution=linux" | tar -C /opt/pycharm --strip-components 1 -xzvf -
 
+# comment out pycharm pro edition
+# Install pycharm professional edition
+
+#RUN curl -L "https://download.jetbrains.com/product?code=PCP&latest&distribution=linux" | tar -C /opt/pycharm --strip-components 1 -xzvf -
 # Add a binary to the PATH that points to the pycharm startup script.
-RUN ln -s /opt/pycharm/bin/pycharm.sh /usr/bin/pycharm
+#RUN ln -s /opt/pycharm/bin/pycharm.sh /usr/bin/pycharm
 
-# comment out pycharm community edition
-# RUN curl -L "https://download.jetbrains.com/product?code=PCC&latest&distribution=linux" | tar -C /opt/pycharm --strip-components 1 -xzvf -
-# RUN ln -s /opt/pycharm/bin/pycharm.sh /usr/bin/pycharm-community
+
+RUN curl -L "https://download.jetbrains.com/product?code=PCC&latest&distribution=linux" | tar -C /opt/pycharm --strip-components 1 -xzvf -
+RUN ln -s /opt/pycharm/bin/pycharm.sh /usr/bin/pycharm-community
 
 # install jupyterlab IDE
 RUN pip3 install jupyterlab
