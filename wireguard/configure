@@ -1,0 +1,15 @@
+#!/bin/bash
+
+echo 'Hello, Coder!'
+
+echo 'Wireguard starting up...'
+echo '** You need to be using a CVM for this to work **'
+
+sudo ufw allow 51820/udp
+sudo ufw allow OpenSSH
+sudo ufw disable
+sudo ufw enable
+sudo ufw status
+sudo systemctl enable wg-quick@wg0.service
+sudo systemctl start wg-quick@wg0.service
+sudo systemctl status wg-quick@wg0.service
