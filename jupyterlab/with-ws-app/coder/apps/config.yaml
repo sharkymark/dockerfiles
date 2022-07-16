@@ -23,11 +23,11 @@ apps:
     command: jupyter-launcher
     # Array of arguments for command. Optional.
     args:
-      - "lab"
-      - "--ServerApp.ip='*'"
-      - "--ServerApp.token=''"
-      - "--ServerApp.password=''"
-      - '--ServerApp.base_url=/api/v0/workspaces/${CODER_WORKSPACE_ID}/proxy/apps/jupyterlab/'
+      - lab
+      - --ServerApp.ip='*'
+      - --ServerApp.token=''
+      - --ServerApp.password=''
+      - --ServerApp.base_url='./'
     # Health checks to get running application status. Can use exec or http
     # health checks to localhost. Optional, but we recommend specifying a
     # health check. If you don't supply one, then an http request is sent to
@@ -35,7 +35,8 @@ apps:
     health-check:
       exec:
         command: "pgrep"
-        args: ["jupyter-lab"]
+        args:
+          - jupyter-lab
       http:
         # Scheme must be "http" or "https". If not specified it inherits
         # the application scheme. Optional.
