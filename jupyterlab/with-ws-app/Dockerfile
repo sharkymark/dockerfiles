@@ -1,9 +1,12 @@
-# inherit Coder's Jupyter image
-FROM codercom/enterprise-jupyter:ubuntu
+# inherit base image with python3
+FROM codercom/enterprise-base:ubuntu
 
 USER root
 
-# hide the Jupyter notebook icon - but use jupyter-launcher to launch lab
+RUN pip3 install jupyter notebook
+RUN pip3 install jupyterlab
+
+# hide the jupyter notebook icon on the workspace dashboard by renaming the jupyter binary - but use jupyter-launcher to launch lab
 RUN mv /usr/local/bin/jupyter /usr/local/bin/jupyter-launcher
 
 # Install Python packages
