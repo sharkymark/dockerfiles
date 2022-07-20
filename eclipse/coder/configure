@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# Run the parent image's (VNC) configure script
+/coder/configure-vnc
+
+# 

@@ -1,0 +1,29 @@
+# 07-17-22 removed portainer, changed Desktop name
+
+apps:
+  - name: VNC
+    scheme: http
+    port: 6081
+    working-directory: /home/coder
+    icon-path: /coder/apps/desktop.png
+    command: supervisorctl
+    args: ["start", "vncserver"]
+    health-check:
+      exec:
+        command: "supervisorctl"
+        args: ["status", "vncserver"]
+      http:
+        scheme: "http"
+        path: "/"
+        port: 6081
+  - name: Eclipse
+    scheme: http
+    port: 6081
+    working-directory: /home/coder
+    icon-path: /coder/apps/eclipse/eclipse.png
+    command: bash
+    args: ["/coder/apps/eclipse/start.sh"]
+    health-check:
+      exec:
+        command: "pgrep"
+        args: ["eclipse"]
