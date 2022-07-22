@@ -4,8 +4,9 @@ FROM docker.io/codercom/enterprise-pycharm:ubuntu
 USER root 
 
 # As root, change the coder user id
+RUN sudo userdel coder && useradd -l -u 1000670000 coder
 
-RUN userdel coder && useradd -l -u 1000670000 coder && chown coder:coder /home/coder
+RUN chown coder:coder /home/coder
 
 # Go back to the user 'coder'
 USER coder
