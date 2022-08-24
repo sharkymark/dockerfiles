@@ -24,15 +24,11 @@ RUN pip3 install jupyterlab
 RUN mv /usr/local/bin/jupyter /usr/local/bin/jupyter.py
 COPY jupyter /usr/local/bin/jupyter
 
-# Download and install VS Code extensions to run in code-server
-RUN mkdir -p /vsix
-ADD ./dongli.python-preview-0.0.4.vsix /vsix
-ADD ./vs-code-extensions-python.txt /vsix
-
 # Add the new configure script
 COPY configure /coder/configure
 
 # image will be marktmilligan/pycharm-jupyter-python3:latest
+# updated last on 08-24-22 mark@coder.com
 
 # Set back to coder user
 USER coder

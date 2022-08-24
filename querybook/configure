@@ -1,0 +1,8 @@
+#!/bin/bash
+
+echo 'create dev URL for Querybook'
+coder urls create $CODER_WORKSPACE_NAME 10001 --name querybook
+
+
+
+
