@@ -24,10 +24,8 @@ RUN ln -s /opt/ps/bin/phpstorm.sh /usr/bin/phpstorm
 
 RUN mkdir -p /payload
 ADD ./launch.json /payload
-ADD ./xdebug.ini /payload
 
-# Add the new configure script
-COPY configure /coder/configure
+COPY xdebug.ini /etc/php/7.4/mods-available/
 
 # Set back to coder user
 USER coder
