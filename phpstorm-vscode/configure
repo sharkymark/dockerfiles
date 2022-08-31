@@ -1,5 +1,5 @@
 # Install PHP Tools extension from Open VSX marketplace into code-server
-SERVICE_URL=https://open-vsx.org/vscode/gallery ITEM_URL=https://open-vsx.org/vscode/item code-server --install-extension devsense.phptools-vscode
+SERVICE_URL=https://open-vsx.org/vscode/gallery ITEM_URL=https://open-vsx.org/vscode/item code-server --install-extension felixfbecker.php-debug
 
 # JetBrains projector-related
 
