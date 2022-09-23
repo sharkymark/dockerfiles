@@ -1,3 +1,0 @@
-# install Python Preview VS Code extension from the image into code-server
-
-/var/tmp/coder/code-server/bin/code-server --install-extension /vsix/dongli.python-preview-0.0.4.vsix 

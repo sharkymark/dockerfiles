@@ -1,0 +1,6 @@
+echo 'create dev URL for Matlab in addition to the workspace dashboard icon'
+coder urls create $CODER_WORKSPACE_NAME 8888 --name matlab
+
+# start Matlab
+echo 'start supervisord and Matlab'
+sudo /usr/bin/supervisord
