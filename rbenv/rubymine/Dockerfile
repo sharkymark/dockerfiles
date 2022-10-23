@@ -1,6 +1,6 @@
 # 2/26/22 update to leverage Coder images
 
-FROM codercom/enterprise-multieditor:ubuntu
+FROM codercom/enterprise-base:ubuntu
 
 # Run everything as root
 USER root
@@ -50,7 +50,21 @@ ENV PATH /usr/local/bin:$PATH
 # add Ruby on Rails to image
 RUN gem install rails -v 7.0.2.2
 
+# packages required for jetbrains projector support
+RUN DEBIAN_FRONTEND="noninteractive" apt-get update -y \
+    && apt-get install -y \
+        libxtst6 \
+        libxrender1 \
+        libfontconfig1 \
+        libxi6 \
+        libgtk-3-0
+
+# Install code-server
+RUN curl -fsSL https://code-server.dev/install.sh | sh
+
 USER coder
+
+# image and tag marktmilligan/ruby-2-7-2:latest
 
 
 
