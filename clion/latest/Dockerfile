@@ -23,8 +23,13 @@ RUN ln -s /opt/clion/bin/clion.sh /usr/bin/clion
 COPY ["configure", "/coder/configure"]
 RUN chmod +x /coder/configure
 
+# change owner to coder so projector CLI can create a config
+RUN chown -R coder:coder /opt
+
 # Set back to coder user
 USER coder
 
 # Add Rust to path
 ENV PATH /home/coder/.cargo/bin:${PATH}
+
+# dockerhub image docker.io/marktmilligan/clion-rust:latest
