@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# copy the personalize script to the /home/coder
+cp /coder/personalize $HOME
