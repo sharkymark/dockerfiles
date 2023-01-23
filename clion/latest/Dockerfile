@@ -19,6 +19,12 @@ RUN curl -L "https://download.jetbrains.com/product?code=CL&latest&distribution=
 # Add a binary to the PATH that points to the clion startup script.
 RUN ln -s /opt/clion/bin/clion.sh /usr/bin/clion
 
+# add rust programming language
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+
+# add code-server (VS Code in a browser)
+RUN curl -fsSL https://code-server.dev/install.sh | sh
+
 # configure script
 COPY ["configure", "/coder/configure"]
 RUN chmod +x /coder/configure
