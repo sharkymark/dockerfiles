@@ -17,7 +17,7 @@ RUN DEBIAN_FRONTEND="noninteractive" apt-get update -y \
 RUN curl -fsSL https://code-server.dev/install.sh | sh
 
 # install go1.19.1
-RUN curl -L "https://dl.google.com/go/go1.19.1.linux-amd64.tar.gz" | tar -C /usr/local -xzvf -
+RUN curl -L "https://dl.google.com/go/go1.20.linux-amd64.tar.gz" | tar -C /usr/local -xzvf -
 
 # Setup go env vars
 ENV GOROOT /usr/local/go

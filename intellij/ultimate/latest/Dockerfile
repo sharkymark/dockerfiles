@@ -14,7 +14,7 @@ RUN apt-get update && \
 
 # Install intellij IDEA Ultimate.
 RUN mkdir -p /opt/idea
-RUN curl -L "https://download.jetbrains.com/product?code=IIU&latest&distribution=linux" | tar -C /opt/idea --strip-components 1 -xzvf -
+RUN curl -L "https://download.jetbrains.com/product?code=IU&latest&distribution=linux" | tar -C /opt/idea --strip-components 1 -xzvf -
 
 # Add a binary to the PATH that points to the intellij startup script.
 RUN ln -s /opt/idea/bin/idea.sh /usr/bin/intellij-idea-ultimate

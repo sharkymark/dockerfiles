@@ -16,9 +16,9 @@ RUN DEBIAN_FRONTEND="noninteractive" apt-get update -y \
 # Install code-server
 RUN curl -fsSL https://code-server.dev/install.sh | sh
 
-# Install IntelliJ IDEA Community.
+# Install IntelliJ Ultimate
 RUN mkdir -p /opt/idea
-RUN curl -L "https://download.jetbrains.com/product?code=IC&latest&distribution=linux" | tar -C /opt/idea --strip-components 1 -xzvf -
+RUN curl -L "https://download.jetbrains.com/product?code=IU&latest&distribution=linux" | tar -C /opt/idea --strip-components 1 -xzvf -
 
 # change owner to coder so projector CLI can create a config
 RUN chown -R coder:coder /opt
