@@ -1,3 +1,8 @@
+#
+# 2023-02-04 pushed to marktmilligan/webstorm:2022.3.2
+# https://www.jetbrains.com/webstorm/download/
+#
+
 # Dockerfile
 FROM codercom/enterprise-base:ubuntu
 
@@ -13,24 +18,13 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 RUN DEBIAN_FRONTEND="noninteractive" apt-get update && apt-get install -y yarn
 
-# Packages required for multi-editor support
-RUN DEBIAN_FRONTEND="noninteractive" apt-get update -y \
-    && apt-get install -y \
-        libxtst6 \
-        libxrender1 \
-        libfontconfig1 \
-        libxi6 \
-        libgtk-3-0
-
-# Install code-server
-RUN curl -fsSL https://code-server.dev/install.sh | sh
-
 # Install WebStorm
 RUN mkdir -p /opt/webstorm
 RUN curl -L "https://download.jetbrains.com/product?code=WS&latest&distribution=linux" | tar -C /opt/webstorm --strip-components 1 -xzvf -
 
-# change owner to coder so projector CLI can create a config
-RUN chown -R coder:coder /opt
+# In the container, run the script to symlink JetBrains Gateway IDE directory to image-installed IDE directory
+# More info: https://www.jetbrains.com/help/idea/remote-development-troubleshooting.html#setup
+# cd /opt/webstorm/bin && ./remote-dev-server.sh registerBackendLocationForGateway
 
 # Set back to coder user
 USER coder
