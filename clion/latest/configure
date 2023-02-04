@@ -1,3 +1,0 @@
-# install VS Code extensions into code-server
-
-SERVICE_URL=https://open-vsx.org/vscode/gallery ITEM_URL=https://open-vsx.org/vscode/item /var/tmp/coder/code-server/bin/code-server --install-extension rust-lang.rust

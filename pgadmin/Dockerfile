@@ -1,4 +1,4 @@
-FROM codercom/enterprise-multieditor:ubuntu
+FROM codercom/enterprise-base:ubuntu
 
 # Run everything as root
 USER root
@@ -20,21 +20,6 @@ ENV PGADMIN_SETUP_PASSWORD pgadmin
 
 # copy configure script to coder folder in container
 COPY [ "configure", "/coder/configure" ]
-
-RUN mkdir -p /opt/pycharm
-
-# Install latest pycharm professional edition
-#RUN curl -L "https://download.jetbrains.com/product?code=PCP&latest&distribution=linux" | tar -C /opt/pycharm --strip-components 1 -xzvf -
-
-# Add a binary to the PATH that points to the pycharm startup script.
-#RUN ln -s /opt/pycharm/bin/pycharm.sh /usr/bin/pycharm
-
-# Install latest pycharm community edition
-RUN curl -L "https://download.jetbrains.com/product?code=PCC&latest&distribution=linux" | tar -C /opt/pycharm --strip-components 1 -xzvf -
-
-# Add a binary to the PATH that points to the pycharm startup script.
-RUN ln -s /opt/pycharm/bin/pycharm.sh /usr/bin/pycharm-community
-
 
 # install postgres
 RUN apt-get update && \

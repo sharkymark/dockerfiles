@@ -1,7 +1,5 @@
 # Dockerfile
-
-# Python
-FROM codercom/enterprise-base:ubuntu
+FROM codercom/enterprise-java:ubuntu
 
 # Run everything as root
 USER root
@@ -18,13 +16,11 @@ RUN DEBIAN_FRONTEND="noninteractive" apt-get update -y \
 # Install code-server
 RUN curl -fsSL https://code-server.dev/install.sh | sh
 
-# Install PyCharm
+# Install IntelliJ IDEA Community.
+RUN mkdir -p /opt/idea
+RUN curl -L "https://download.jetbrains.com/product?code=IC&latest&distribution=linux" | tar -C /opt/idea --strip-components 1 -xzvf -
 
-RUN mkdir -p /opt/pycharm
-RUN curl -L "https://download.jetbrains.com/product?code=PCC&latest&distribution=linux" | tar -C /opt/pycharm --strip-components 1 -xzvf -
-
-#RUN curl -L "https://download.jetbrains.com/product?code=PCP&latest&distribution=linux" | tar -C /opt/pycharm --strip-components 1 -xzvf -
-
+# change owner to coder so projector CLI can create a config
 RUN chown -R coder:coder /opt
 
 # Set back to coder user

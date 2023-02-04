@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo 'start supervisord and Airflow standalone with SQLite3 and scheduler'
+echo 'retrieve password for username: admin from $HOME/airflow/standalone_admin_password.txt'
+sudo /usr/bin/supervisord
