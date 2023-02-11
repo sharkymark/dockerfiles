@@ -1,3 +1,10 @@
+#
+# https://kasmweb.com/docs/latest/guide/custom_images.html
+# https://github.com/Kong/insomnia/releases
+#
+# 2023-02-11 built and pushed image to docker.io marktmilligan/kasn:latest
+#
+
 FROM kasmweb/desktop:1.12.0
 
 USER root
@@ -14,5 +21,21 @@ RUN adduser kasm-user ssl-cert
 RUN wget -O wget -O /tmp/insomnia.deb https://github.com/Kong/insomnia/releases/download/core%402022.7.5/Insomnia.Core-2022.7.5.deb && \
     dpkg -i /tmp/insomnia.deb && \
     rm /tmp/insomnia.deb
+
+# Install baseline packages
+RUN apt-get update && \
+    DEBIAN_FRONTEND="noninteractive" apt-get install --yes \
+      bash \
+      curl \
+      htop \
+      locales \
+      man \
+      python3 \
+      python3-pip \
+      software-properties-common \
+      sudo \
+      vim \
+      wget \
+      rsync
 
 USER 1000
