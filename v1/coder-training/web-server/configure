@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# script run automatically after workspace build and before the personalize script
+# the linux user is coder (as set in the last step of the Dockerfile; not root)
+
+# create a dev URL, accessible only by the workspace owner
+coder urls create $CODER_WORKSPACE_NAME 8888 --name web-server --access private
+
+# copy html file to home folder
+cp index.html $HOME
+
+# starts the web server and put in background
+python3 -m http.server 8888 &
