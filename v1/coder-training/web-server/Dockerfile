@@ -14,5 +14,10 @@ RUN chmod +x /coder/configure
 # Copy index.html 
 COPY ["index.html", "/coder/index.html"]
 
+# install supervisord to launch the Python web server
+RUN apt-get update && apt-get install -y supervisor
+RUN mkdir -p /var/log/supervisor
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
 # set user back to coder and not root
 USER coder

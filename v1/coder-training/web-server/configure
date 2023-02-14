@@ -4,10 +4,13 @@
 # the linux user is coder (as set in the last step of the Dockerfile; not root)
 
 # create a dev URL, accessible only by the workspace owner
+echo 'create a dev URL for the Python web server'
 coder urls create $CODER_WORKSPACE_NAME 8888 --name web-server --access private
 
 # copy html file to home folder
-cp index.html $HOME
+echo 'copy index.html to $HOME'
+cp /coder/index.html $HOME
 
-# starts the web server and put in background
-python3 -m http.server 8888 &
+# start supervisord and the Pythonweb server
+echo 'start supervisord and the Python web server'
+sudo /usr/bin/supervisord
