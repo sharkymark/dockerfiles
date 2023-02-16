@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# https://github.com/JetBrains/projector-installer#Installation
+# https://github.com/JetBrains/projector-installer/blob/master/COMMANDS.md
+
+# Configure IntelliJ configs
+
+# Assumes you have IntelliJ (/opt/idea)
+# and pip3 installed in
+# your image and the "coder" user has filesystem
+# permissions for "/opt/*"
+
+pip3 install projector-installer --user
+/home/coder/.local/bin/projector --accept-license 
+
+/home/coder/.local/bin/projector config add intellij1 /opt/idea --force --use-separate-config --port 9001 --hostname localhost
+
+/home/coder/.local/bin/projector config add intellij2 /opt/idea --force --use-separate-config --port 9002  --hostname localhost
