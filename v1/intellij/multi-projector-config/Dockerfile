@@ -1,4 +1,4 @@
-FROM codercom/enterprise-base:ubuntu
+FROM codercom/enterprise-java:ubuntu
 
 # Run everything as root
 USER root
