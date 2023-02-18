@@ -11,6 +11,7 @@ USER root
 
 COPY kasmvnc.yaml /etc/kasmvnc/kasmvnc.yaml
 COPY vnc_startup.sh /dockerstartup/vnc_startup.sh
+COPY kasm_default_profile.sh /dockerstartup/kasm_default_profile.sh
 RUN cp -r /home/kasm-user /tmp/kasm-user
 RUN apt-get update && apt-get install sudo
 RUN echo "kasm-user ALL=(ALL) NOPASSWD:ALL" >>/etc/sudoers.d/nopasswd

@@ -2,7 +2,8 @@
 # https://kasmweb.com/docs/latest/guide/custom_images.html
 # https://github.com/Kong/insomnia/releases
 #
-# 2023-02-11 built and pushed image to docker.io marktmilligan/intellij-community-kasm:2022.3.2
+# 2023-02-18 built and pushed image to docker.io marktmilligan/intellij-community-kasm:2022.3.2
+# added modified kasm_default_profile.sh removing the -p flag in cp of default profile to $HOME
 #
 
 FROM kasmweb/desktop:1.12.0
@@ -11,6 +12,7 @@ USER root
 
 COPY kasmvnc.yaml /etc/kasmvnc/kasmvnc.yaml
 COPY vnc_startup.sh /dockerstartup/vnc_startup.sh
+COPY kasm_default_profile.sh /dockerstartup/kasm_default_profile.sh
 RUN cp -r /home/kasm-user /tmp/kasm-user
 RUN apt-get update && apt-get install sudo
 RUN echo "kasm-user ALL=(ALL) NOPASSWD:ALL" >>/etc/sudoers.d/nopasswd
