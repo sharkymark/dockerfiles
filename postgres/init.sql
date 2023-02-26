@@ -13,3 +13,6 @@ INSERT INTO public.persons values(nextval('persons_sequence'),'Mark','Milligan',
 (nextval('persons_sequence'),'Kyle','Carberry','kyle@coder.com'),
 (nextval('persons_sequence'),'Brad','Pitt','brad@coder.com'),
 (nextval('persons_sequence'),'Katie','Perry','katie@coder.com');
+
+
+CREATE DATABASE go8_db; 
