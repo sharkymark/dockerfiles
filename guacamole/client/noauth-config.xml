@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<configs>
-    <config name="vnc-connection" protocol="vnc">
-        <param name="hostname" value="localhost">
-        <param name="port" value="5901">
-    </config>    
-</configs>
