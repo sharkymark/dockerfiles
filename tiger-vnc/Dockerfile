@@ -15,6 +15,7 @@ RUN apt-get update && \
     xfce4 \
     xfce4-goodies \
     xfce4-terminal \
+    xfce4-screensaver \
     firefox \
     tigervnc-standalone-server \
     supervisor
