@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# script run automatically after workspace build and before the personalize script
+# the linux user is coder (as set in the last step of the Dockerfile; not root)
+
+# copy fish.config to $HOME
+echo 'copy config.fish to $HOME'
+mkdir -p $HOME/.config/fish/
+cp /coder/config.fish $HOME/.config/fish/config.fish
