@@ -1,4 +1,8 @@
 # Dockerfile
+#
+# Built and uploaded to docker.io/marktmilligan/phpstorm-vscode:2022.1.4 on 2023-03-22
+#
+#
 FROM codercom/enterprise-base:ubuntu
 
 # Run everything as root
@@ -20,7 +24,9 @@ RUN curl -fsSL https://code-server.dev/install.sh | sh
 
 # Install phpstorm
 RUN mkdir -p /opt/ps
-RUN curl -L "https://download.jetbrains.com/product?code=PS&latest&distribution=linux" | tar -C /opt/ps --strip-components 1 -xzvf -
+#RUN curl -L "https://download.jetbrains.com/product?code=PS&latest&distribution=linux" | tar -C /opt/ps --strip-components 1 -xzvf -
+
+RUN curl -L "https://download.jetbrains.com/webide/PhpStorm-2022.1.4.tar.gz" | tar -C /opt/ps --strip-components 1 -xzvf -
 
 # packages required for jetbrains projector support
 RUN DEBIAN_FRONTEND="noninteractive" apt-get update -y \
