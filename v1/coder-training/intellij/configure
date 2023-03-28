@@ -7,3 +7,4 @@
 # More info: https://www.jetbrains.com/help/idea/remote-development-troubleshooting.html#setup
 echo 'symbolic link from /home/coder to /opt/idea'
 /opt/idea/bin/remote-dev-server.sh registerBackendLocationForGateway
+echo 'symbolic link created'
