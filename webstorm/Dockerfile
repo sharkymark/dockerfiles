@@ -1,6 +1,9 @@
 #
 # 2023-02-04 pushed to marktmilligan/webstorm:2022.3.2
+# 2023-04-01 pushed to marktmilligan/webstorm:2023.1
+# https://download.jetbrains.com/webstorm/WebStorm-2023.1.tar.gz
 # https://www.jetbrains.com/webstorm/download/
+# https://data.services.jetbrains.com/products/releases?code=ws
 #
 
 # Dockerfile
@@ -20,7 +23,9 @@ RUN DEBIAN_FRONTEND="noninteractive" apt-get update && apt-get install -y yarn
 
 # Install WebStorm
 RUN mkdir -p /opt/webstorm
-RUN curl -L "https://download.jetbrains.com/product?code=WS&latest&distribution=linux" | tar -C /opt/webstorm --strip-components 1 -xzvf -
+RUN curl -L "https://download.jetbrains.com/webstorm/WebStorm-2023.1.tar.gz" | tar -C /opt/webstorm --strip-components 1 -xzvf -
+
+#RUN curl -L "https://download.jetbrains.com/product?code=WS&latest&distribution=linux" | tar -C /opt/webstorm --strip-components 1 -xzvf -
 
 # In the container, run the script to symlink JetBrains Gateway IDE directory to image-installed IDE directory
 # More info: https://www.jetbrains.com/help/idea/remote-development-troubleshooting.html#setup
