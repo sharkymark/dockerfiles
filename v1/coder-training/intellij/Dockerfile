@@ -1,5 +1,6 @@
 # 
 # Pushed to DockerHub 2023-02-13 as marktmilligan/v1-intellij-ultimate-gateway:latest
+# Pushed to DockerHub 2023-04-13 as marktmilligan/v1-intellij-ultimate-gateway:2023.1
 #
 
 # JDK 11
