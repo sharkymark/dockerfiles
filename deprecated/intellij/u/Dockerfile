@@ -1,7 +1,7 @@
 # Dockerfile
 #
 # JetBrains IntelliJ IDEA Ultimate
-# 2023-03-06 build and push to DockerHub
+# 2023-04-26 build and push to DockerHub tag 2022.1.4
 # marktmilligan/iu-chown:latest (projector does not work)
 # marktmilligan/iu-chown:2022.1.4
 # marktmilligan/iu-chown:2021.3.3
