@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# copy the personalize script to the /home/coder
+if [ ! -f "personalize" ]; then
+  echo "A personalize script does not exist. Copy one into $HOME"
+  cp /coder/personalize $HOME
+else
+  echo "A personalize script does exist. Do not overwrite."
+fi
+
+
