@@ -1,11 +1,11 @@
 #
-# 2023-02-09 pushed to marktmilligan/intellij-idea-community-vnc:2022.3.2
-# 2023-08-26 pushed marktmilligan/intellij-idea-community-vnc:2023.2.1
+# 2023-08-27 pushed to marktmilligan/intellij-idea-community-vnc:2022.3.2
+# 2023-08-27 pushed marktmilligan/intellij-idea-community-vnc:2023.2.1
 # https://data.services.jetbrains.com/products/releases?code=IC
 #
 
 # Dockerfile
-FROM codercom/enterprise-vnc:ubuntu
+FROM marktmilligan/vnc:coder-v2
 
 # Run everything as root
 USER root

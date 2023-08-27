@@ -3,7 +3,11 @@ FROM codercom/enterprise-base:ubuntu
 # concepts derived from:
 # https://github.com/coder/enterprise-images/tree/main/images/vnc
 # https://novnc.com/
+# https://github.com/novnc/noVNC/releases
+# https://github.com/novnc/websockify/releases
 # https://www.turbovnc.org/
+#
+# 
 
 # Run everything as root
 USER root
@@ -37,6 +41,7 @@ RUN apt-get update && apt-get install -y \
   libxtst6 \
   libxv1 \
   libglu1-mesa \
+  libegl1-mesa \
   libc6-dev \
   libglu1 \
   libsm6 \
@@ -63,20 +68,14 @@ ARG VNC_ROOT_DIR=/opt/vnc
 
 # download TurboVNC server
 
-#ARG TURBOVNC_VERSION=3.0.3
-#ARG VIRTUALGL_VERSION=3.1
-#ARG LIBJPEG_VERSION=3.0
-
-ARG TURBOVNC_VERSION=2.2.5
-ARG VIRTUALGL_VERSION=2.6.4
-ARG LIBJPEG_VERSION=2.0.5
-
-RUN apt-get update && apt-get install -y libegl1-mesa
+ARG TURBOVNC_VERSION=3.0.3
+ARG VIRTUALGL_VERSION=3.1
+ARG LIBJPEG_VERSION=3.0
 
 RUN cd /tmp \
-  && curl -fsSL -O https://phoenixnap.dl.sourceforge.net/project/turbovnc/${TURBOVNC_VERSION}/turbovnc_${TURBOVNC_VERSION}_amd64.deb \
-    -O https://newcontinuum.dl.sourceforge.net/project/libjpeg-turbo/${LIBJPEG_VERSION}/libjpeg-turbo-official_${LIBJPEG_VERSION}_amd64.deb \
-    -O https://gigenet.dl.sourceforge.net/project/virtualgl/${VIRTUALGL_VERSION}/virtualgl_${VIRTUALGL_VERSION}_amd64.deb \
+  && curl -fsSL -O https://netix.dl.sourceforge.net/project/turbovnc/${TURBOVNC_VERSION}/turbovnc_${TURBOVNC_VERSION}_amd64.deb \
+    -O https://netix.dl.sourceforge.net/project/libjpeg-turbo/${LIBJPEG_VERSION}/libjpeg-turbo-official_${LIBJPEG_VERSION}_amd64.deb \
+    -O https://netix.dl.sourceforge.net/project/virtualgl/${VIRTUALGL_VERSION}/virtualgl_${VIRTUALGL_VERSION}_amd64.deb \
     && dpkg -i *.deb \
     && rm -f /tmp/*.deb \
     && sed -i 's/$host:/unix:/g' /opt/TurboVNC/bin/vncserver
@@ -100,17 +99,14 @@ ENV VNC_SCRIPTS=$VNC_ROOT_DIR/scripts \
   VNC_SUPERVISOR_CONFIG=$VNC_ROOT_DIR/supervisord.conf \
   VNC_PORT=5990 \
   VNC_DISPLAY_ID=:90 \
-  VNC_COL_DEPTH=24 \
-  VNC_RESOLUTION=1920x1080 \
+  VNC_COL_DEPTH=16 \
+  VNC_RESOLUTION=1280x1024 \
   NO_VNC_HOME=$VNC_ROOT_DIR/noVNC \
   NO_VNC_PORT=6081 \
   XFCE_BASE_DIR=$VNC_ROOT_DIR/xfce4 \
   XFCE_DEST_DIR=$HOME/.config/xfce4
 
 WORKDIR $HOME
-
-# Enable better defaults for command tab completion.
-# RUN chsh -s $(readlink -f $(which zsh)) coder 
 
 ADD --chown=coder:coder ./xfce4 $XFCE_BASE_DIR
 ADD --chown=coder:coder ./vnc $VNC_ROOT_DIR
