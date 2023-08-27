@@ -1,34 +1,24 @@
-FROM codercom/enterprise-multieditor:ubuntu
+FROM codercom/enterprise-base:ubuntu
 
+# concepts derived from:
 # https://github.com/coder/enterprise-images/tree/main/images/vnc
-# https://github.com/coder/enterprise-images/tree/main/images/vnc
+# https://novnc.com/
+# https://www.turbovnc.org/
 
 # Run everything as root
 USER root
 
-# WebStorm
-
-RUN mkdir -p /opt/webstorm
-
-RUN curl -L "https://download.jetbrains.com/product?code=WS&latest&distribution=linux" | tar -C /opt/webstorm --strip-components 1 -xzvf -
-
-# Add a binary to the PATH that points to the startup script.
-RUN ln -s /opt/webstorm/bin/webstorm.sh /usr/bin/webstorm
-
-# Set back to coder user
-USER coder
-
 # Add VNC
-USER 0
-
 ARG DEBCONF_NONINTERACTIVE_SEEN=true
 ARG DEBIAN_FRONTEND="noninteractive"
-ARG TURBOVNC_VERSION=2.2.5
-ARG VIRTUALGL_VERSION=2.6.4
-ARG LIBJPEG_VERSION=2.0.5
 
 RUN echo 'tzdata tzdata/Areas select Etc' | debconf-set-selections; \
     echo 'tzdata tzdata/Zones/Etc select UTC' | debconf-set-selections
+
+RUN apt-get install -y wget
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \ 
+    && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list
+
 
 RUN apt-get update && apt-get install -y \
   wget \
@@ -42,7 +32,7 @@ RUN apt-get update && apt-get install -y \
   x11-apps \
   xterm \
   python-numpy \
-  firefox \
+  google-chrome-stable \
   fonts-lyx \
   libxtst6 \
   libxv1 \
@@ -71,10 +61,22 @@ RUN locale-gen en_US.UTF-8
 ARG HOME=/home/coder
 ARG VNC_ROOT_DIR=/opt/vnc
 
+# download TurboVNC server
+
+#ARG TURBOVNC_VERSION=3.0.3
+#ARG VIRTUALGL_VERSION=3.1
+#ARG LIBJPEG_VERSION=3.0
+
+ARG TURBOVNC_VERSION=2.2.5
+ARG VIRTUALGL_VERSION=2.6.4
+ARG LIBJPEG_VERSION=2.0.5
+
+RUN apt-get update && apt-get install -y libegl1-mesa
+
 RUN cd /tmp \
-  && curl -fsSL -O https://netix.dl.sourceforge.net/project/turbovnc/${TURBOVNC_VERSION}/turbovnc_${TURBOVNC_VERSION}_amd64.deb \
-    -O https://netix.dl.sourceforge.net/project/libjpeg-turbo/${LIBJPEG_VERSION}/libjpeg-turbo-official_${LIBJPEG_VERSION}_amd64.deb \
-    -O https://netix.dl.sourceforge.net/project/virtualgl/${VIRTUALGL_VERSION}/virtualgl_${VIRTUALGL_VERSION}_amd64.deb \
+  && curl -fsSL -O https://phoenixnap.dl.sourceforge.net/project/turbovnc/${TURBOVNC_VERSION}/turbovnc_${TURBOVNC_VERSION}_amd64.deb \
+    -O https://newcontinuum.dl.sourceforge.net/project/libjpeg-turbo/${LIBJPEG_VERSION}/libjpeg-turbo-official_${LIBJPEG_VERSION}_amd64.deb \
+    -O https://gigenet.dl.sourceforge.net/project/virtualgl/${VIRTUALGL_VERSION}/virtualgl_${VIRTUALGL_VERSION}_amd64.deb \
     && dpkg -i *.deb \
     && rm -f /tmp/*.deb \
     && sed -i 's/$host:/unix:/g' /opt/TurboVNC/bin/vncserver
@@ -99,7 +101,7 @@ ENV VNC_SCRIPTS=$VNC_ROOT_DIR/scripts \
   VNC_PORT=5990 \
   VNC_DISPLAY_ID=:90 \
   VNC_COL_DEPTH=24 \
-  VNC_RESOLUTION=3840x2160 \
+  VNC_RESOLUTION=1920x1080 \
   NO_VNC_HOME=$VNC_ROOT_DIR/noVNC \
   NO_VNC_PORT=6081 \
   XFCE_BASE_DIR=$VNC_ROOT_DIR/xfce4 \
@@ -108,7 +110,7 @@ ENV VNC_SCRIPTS=$VNC_ROOT_DIR/scripts \
 WORKDIR $HOME
 
 # Enable better defaults for command tab completion.
-RUN chsh -s $(readlink -f $(which zsh)) coder 
+# RUN chsh -s $(readlink -f $(which zsh)) coder 
 
 ADD --chown=coder:coder ./xfce4 $XFCE_BASE_DIR
 ADD --chown=coder:coder ./vnc $VNC_ROOT_DIR
@@ -119,11 +121,17 @@ RUN find $VNC_SETUP_SCRIPTS -name '*.sh' -exec chmod a+x {} +
 RUN $VNC_SETUP_SCRIPTS/set_user_permission.sh $VNC_ROOT_DIR \
   && chmod +x $VNC_XSTARTUP
 
-COPY ["configure", "/coder/configure"]
-RUN chmod +x /coder/configure
+COPY ["start_vnc", "/coder/start_vnc"]
+RUN chmod +x /coder/start_vnc
 
+
+# set back to coder user and no longer root
 USER coder
 
+# install noVNC and expose port 6081
 RUN $VNC_SETUP_SCRIPTS/no_vnc.sh
-
 EXPOSE $NO_VNC_PORT
+
+#
+# In a Coder template's `startup_script`, run `/coder/start_vnc` to start the TurboVNC server and noVNC
+#
