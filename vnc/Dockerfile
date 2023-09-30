@@ -36,6 +36,7 @@ RUN apt-get update && apt-get install -y \
   x11-apps \
   xterm \
   python-numpy \
+  firefox \
   google-chrome-stable \
   fonts-lyx \
   libxtst6 \
