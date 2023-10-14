@@ -1,12 +1,16 @@
 # Dockerfile
 #
 # JetBrains IntelliJ IDEA Ultimate
+# 2023-10-14 build and push to DockerHub tag 2022.2.3
 # 2023-04-26 build and push to DockerHub tag 2022.1.4
-# marktmilligan/iu-chown:latest (projector does not work)
+# marktmilligan/iu-chown:2023.2.3
 # marktmilligan/iu-chown:2022.1.4
 # marktmilligan/iu-chown:2021.3.3
 #
 # https://data.services.jetbrains.com/products/releases?code=IU
+#
+# docker build -t marktmilligan/iu-chown:2023.2.3 .
+# docker push marktmilligan/iu-chown:2023.2.3
 #
 FROM codercom/enterprise-java:ubuntu
 
@@ -22,12 +26,9 @@ RUN DEBIAN_FRONTEND="noninteractive" apt-get update -y \
         libxi6 \
         libgtk-3-0
 
-# Install code-server
-RUN curl -fsSL https://code-server.dev/install.sh | sh
-
 # Install IntelliJ IDEA Ultimate.
 RUN mkdir -p /opt/idea
-RUN curl -L "https://download.jetbrains.com/idea/ideaIU-2022.1.4.tar.gz" | tar -C /opt/idea --strip-components 1 -xzvf -
+RUN curl -L "https://download.jetbrains.com/idea/ideaIU-2023.2.3.tar.gz" | tar -C /opt/idea --strip-components 1 -xzvf -
 
 # change owner to coder so projector CLI can create a config
 RUN chown -R coder:coder /opt
