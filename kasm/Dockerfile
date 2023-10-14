@@ -2,10 +2,11 @@
 # https://kasmweb.com/docs/latest/guide/custom_images.html
 # https://github.com/Kong/insomnia/releases
 #
-# 2023-02-11 built and pushed image to docker.io marktmilligan/kasn:latest
+# 2023-10-14 built and pushed image to docker.io marktmilligan/kasn:latest 8.2.0, kasm 1.12.0
+# 2023-02-11 built and pushed image to docker.io marktmilligan/kasn:latest 2023.2.2, kasm 1.14.0
 #
 
-FROM kasmweb/desktop:1.12.0
+FROM kasmweb/desktop:1.14.0
 
 USER root
 
@@ -19,7 +20,7 @@ RUN DEBIAN_FRONTEND=noninteractive make-ssl-cert generate-default-snakeoil --for
 RUN adduser kasm-user ssl-cert
 
 # Install Insomnia
-RUN wget -O wget -O /tmp/insomnia.deb https://github.com/Kong/insomnia/releases/download/core%402022.7.5/Insomnia.Core-2022.7.5.deb && \
+RUN wget -O wget -O /tmp/insomnia.deb https://github.com/Kong/insomnia/releases/download/core%402023.2.2/Insomnia.Core-2023.2.2.deb && \
     dpkg -i /tmp/insomnia.deb && \
     rm /tmp/insomnia.deb
 
