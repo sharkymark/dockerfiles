@@ -1,4 +1,6 @@
-# 2/26/22 update to leverage Coder images
+# 2023-11-12 update to rubymine 2023.2.5 docker.io/marktmilligan/ruby-2-7-2:rm-2023.2.5
+# 2022-2-26 update docker.io/marktmilligan/ruby-2-7-2:latest
+# https://data.services.jetbrains.com/products/releases?code=RM
 
 FROM codercom/enterprise-base:ubuntu
 
@@ -38,16 +40,19 @@ RUN gem install bundler
 RUN mkdir -p /opt/rubymine
 
 # latest version
-RUN curl -L "https://download.jetbrains.com/product?code=RM&latest&distribution=linux" | tar -C /opt/rubymine --strip-components 1 -xzvf -
+#RUN curl -L "https://download.jetbrains.com/product?code=RM&latest&distribution=linux" | tar -C /opt/rubymine --strip-components 1 -xzvf -
+
+# specific version
+RUN curl -L "https://download.jetbrains.com/ruby/RubyMine-2023.2.5.tar.gz" | tar -C /opt/rubymine --strip-components 1 -xzvf -
 
 
-
-# Add a binary to the PATH that points to the webstorm startup script
+# Add a binary to the PATH that points to the rubymine startup script for coder v1
 RUN ln -s /opt/rubymine/bin/rubymine.sh /usr/local/bin/rubymine
 
 ENV PATH /usr/local/bin:$PATH
 
 # add Ruby on Rails to image
+RUN gem install net-imap -v 0.3.7
 RUN gem install rails -v 7.0.2.2
 
 # packages required for jetbrains projector support
@@ -59,12 +64,10 @@ RUN DEBIAN_FRONTEND="noninteractive" apt-get update -y \
         libxi6 \
         libgtk-3-0
 
-# Install code-server
-RUN curl -fsSL https://code-server.dev/install.sh | sh
+# change owner to coder so projector CLI can create a config
+RUN chown -R coder:coder /opt
 
 USER coder
-
-# image and tag marktmilligan/ruby-2-7-2:latest
 
 
 
