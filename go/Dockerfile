@@ -10,6 +10,9 @@
 # https://marketplace.visualstudio.com/items?itemName=GitHub.copilot
 # https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat
 #
+# aws toolkit - amazon q, codewhisper
+# https://marketplace.visualstudio.com/items?itemName=AmazonWebServices.aws-toolkit-vscode
+#
 
 # dockerfile
 FROM codercom/enterprise-base:ubuntu

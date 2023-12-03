@@ -1,5 +1,10 @@
 README.txt
 
+# Amazon CodeWhisperer
+
+The [AWS Toolkit for VS Code extension](https://marketplace.visualstudio.com/items?itemName=AmazonWebServices.aws-toolkit-vscode) is required to run Amazon CodeWhisperer
+
+You also need a free Build ID or your organization's AWS Start page
 
 # GitHub Copilot chat VS Code Extension
 
