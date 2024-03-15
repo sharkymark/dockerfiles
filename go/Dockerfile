@@ -1,4 +1,5 @@
 #
+# 2024-03-15 marktmilligan/go:1.22.1
 # 2023-12-23 pushed to marktmilligan/go.1.21.5 with
 #   github copilot 1.143.601
 #   aws toolkit 2.4.0
@@ -27,7 +28,7 @@ FROM codercom/enterprise-base:ubuntu
 USER root
 
 # install go
-RUN curl -L "https://dl.google.com/go/go1.21.5.linux-amd64.tar.gz" | tar -C /usr/local -xzvf -
+RUN curl -L "https://dl.google.com/go/go1.22.1.linux-amd64.tar.gz" | tar -C /usr/local -xzvf -
 
 # Setup go env vars
 ENV GOROOT /usr/local/go
@@ -36,6 +37,8 @@ ENV PATH $PATH:$GOROOT/bin
 ENV GOPATH /home/coder/go
 ENV GOBIN $GOPATH/bin
 ENV PATH $PATH:$GOBIN
+
+RUN apt update -y
 
 # install zsh
 RUN apt install zsh -y
