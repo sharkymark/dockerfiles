@@ -1,15 +1,12 @@
 #
-# 2023-02-04 pushed to marktmilligan/intellij-idea-community
+# 2024-03-21 pushed to marktmilligan/intellij-idea-community
 #
 
 # Dockerfile
-FROM codercom/enterprise-java:ubuntu
+FROM marktmilligan/java:jdk-11
 
 # Run everything as root
 USER root
-
-# Install code-server
-RUN curl -fsSL https://code-server.dev/install.sh | sh
 
 # Install IntelliJ IDEA Community
 RUN mkdir -p /opt/idea
