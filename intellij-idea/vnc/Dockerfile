@@ -1,4 +1,5 @@
 #
+# 2024-08-19 pushed to marktmilligan/intellij-idea-community-vnc:2024.2.0.1
 # 2024-06-21 pushed to marktmilligan/intellij-idea-community-vnc:2024.1.4
 # 2024-03-21 pushed to marktmilligan/intellij-idea-community-vnc:2023.3.5
 # 2023-09-23 pushed to marktmilligan/intellij-idea-community-vnc:2023.2.2
@@ -19,7 +20,7 @@ ENV PATH $PATH:$JAVA_HOME/bin
 
 # Install IntelliJ IDEA Community
 RUN mkdir -p /opt/idea
-RUN curl -L "https://download.jetbrains.com/idea/ideaIC-2024.1.4.tar.gz" | tar -C /opt/idea --strip-components 1 -xzvf -
+RUN curl -L "https://download.jetbrains.com/idea/ideaIC-2024.2.0.1.tar.gz" | tar -C /opt/idea --strip-components 1 -xzvf -
 
 # Set back to coder user
 USER coder
