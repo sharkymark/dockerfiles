@@ -17,8 +17,12 @@ USER root
 RUN pip3 install jupyterlab && \
     pip3 install jupyter-core && \
     pip3 install notebook && \
-    pip3 install pandas
+    pip3 install pandas && \
+    pip3 install prettytable
 
+ARG CACHEBUST=1
+RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --method=standalone --prefix=/tmp/code-server \
+&& rm -rf /tmp/code-server/install.sh
 
 # Set back to coder user
 USER coder
