@@ -1,5 +1,5 @@
 #
-# 2025-02-11 marktmilligan/go:1.24.0
+# 2025-04-09 marktmilligan/go:1.24.0
 # 2024-08-30 martkmilligan/go:1.23.0
 # 2024-03-15 marktmilligan/go:1.22.1
 # 2023-12-23 pushed to marktmilligan/go.1.21.5 with
@@ -14,11 +14,13 @@
 # dockerfile
 FROM codercom/enterprise-base:ubuntu
 
+ARG GO_RELEASE="1.24.0"
+
 # run everything as root
 USER root
 
 # install go
-RUN curl -L "https://dl.google.com/go/go1.24.0.linux-amd64.tar.gz" | tar -C /usr/local -xzvf -
+RUN curl -L "https://dl.google.com/go/go${GO_RELEASE}.linux-amd64.tar.gz" | tar -C /usr/local -xzvf -
 
 # Setup go env vars
 ENV GOROOT /usr/local/go
