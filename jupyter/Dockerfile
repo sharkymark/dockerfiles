@@ -1,4 +1,5 @@
 #
+# 2025-04-20 marktmilligan/jupyter:latest
 # 2024-08-05 marktmilligan/jupyter:latest
 #
 # https://jupyter.org/install
@@ -8,10 +9,20 @@
 #
 
 # dockerfile
-FROM codercom/enterprise-base:ubuntu
+FROM python:3.13-slim
 
-# run everything as root
-USER root
+RUN DEBIAN_FRONTEND="noninteractive" apt-get update -y && \
+    apt-get install -y \
+    curl \
+    netcat-traditional \
+    procps \
+    ssh \
+    git \
+    net-tools \
+    wget \
+    htop \
+    sudo \
+    build-essential
 
 # install jupyter and pandas
 RUN pip3 install jupyterlab && \
@@ -20,9 +31,14 @@ RUN pip3 install jupyterlab && \
     pip3 install pandas && \
     pip3 install prettytable
 
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
 ARG CACHEBUST=1
 RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --method=standalone --prefix=/tmp/code-server \
 && rm -rf /tmp/code-server/install.sh
 
-# Set back to coder user
+RUN useradd -m -s /bin/bash coder && \
+    usermod -aG sudo coder && \
+    echo "coder ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/coder && \
+    chmod 0440 /etc/sudoers.d/coder
 USER coder
