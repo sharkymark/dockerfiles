@@ -8,7 +8,8 @@ RUN DEBIAN_FRONTEND="noninteractive" apt-get update -y && \
     ssh \
     git \
     net-tools \
-    htop build-essential \
+    htop \
+    build-essential \
     nodejs \
     npm \
     sudo \
