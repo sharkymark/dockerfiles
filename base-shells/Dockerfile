@@ -12,7 +12,7 @@ RUN apt install fish -y
 RUN mkdir /coder
 
 # Copy dotfiles to image
-COPY [".bashrc", ".zshrc", "config.fish","/coder"]
+COPY [".bashrc", ".zshrc", "config.fish"]
 
 # Return to Coder user
 USER coder
