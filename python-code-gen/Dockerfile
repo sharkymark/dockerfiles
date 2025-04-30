@@ -17,6 +17,13 @@ RUN DEBIAN_FRONTEND="noninteractive" apt-get update -y && \
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
+# Install GitHub CLI
+RUN ARCH=$(dpkg --print-architecture) && \
+    GH_VERSION=$(curl -s https://api.github.com/repos/cli/cli/releases/latest | grep tag_name | cut -d '"' -f 4 | cut -c 2-) && \
+    curl -sSL "https://github.com/cli/cli/releases/latest/download/gh_${GH_VERSION}_linux_${ARCH}.deb" -o gh.deb && \
+    dpkg -i gh.deb && \
+    rm gh.deb
+
 RUN useradd coder \
     --create-home \
     --shell=/bin/bash \
@@ -32,3 +39,4 @@ RUN curl -fsSL https://github.com/block/goose/releases/download/stable/download_
 
 # Install Aider
 RUN curl -LsSf https://aider.chat/install.sh | sh
+
