@@ -10,10 +10,9 @@ RUN DEBIAN_FRONTEND="noninteractive" apt-get update -y && \
     net-tools \
     htop \
     build-essential \
-    nodejs \
-    npm \
     sudo \
-    wget
+    wget \
+    pipx
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
