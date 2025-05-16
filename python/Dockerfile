@@ -16,7 +16,8 @@ RUN DEBIAN_FRONTEND="noninteractive" apt-get update -y && \
     wget \
     pipx \
     sudo \
-    screen
+    screen \
+    tmux
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
