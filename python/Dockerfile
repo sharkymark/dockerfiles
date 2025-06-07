@@ -2,6 +2,7 @@
 
 FROM python:3.13-slim
 
+
 RUN DEBIAN_FRONTEND="noninteractive" apt-get update -y && \
     apt-get install -y \
     curl \
@@ -10,7 +11,8 @@ RUN DEBIAN_FRONTEND="noninteractive" apt-get update -y && \
     ssh \
     git \
     net-tools \
-    htop build-essential \
+    htop \
+    build-essential \
     nodejs \
     npm \
     wget \
@@ -31,6 +33,7 @@ RUN ARCH=$(dpkg --print-architecture) && \
 RUN useradd coder \
     --create-home \
     --shell=/bin/bash \
+    --groups=sudo \
     --uid=1000 \
     --user-group && \
     echo "coder ALL=(ALL) NOPASSWD:ALL" >>/etc/sudoers.d/nopasswd
