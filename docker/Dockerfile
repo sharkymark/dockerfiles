@@ -14,24 +14,31 @@ RUN DEBIAN_FRONTEND="noninteractive" apt-get update -y && \
     nodejs \
     npm \
     pipx \
-    sudo \
-    docker.io && \
+    sudo && \
     rm -rf /var/lib/apt/lists/*
+
+# Add Docker's official GPG key and repository
+RUN mkdir -p /etc/apt/keyrings && \
+    curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg && \
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+    tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+# Install Docker Engine, CLI, and plugins
+RUN apt-get update && \
+    apt-get install -y \
+    docker-ce \
+    docker-ce-cli \
+    containerd.io \
+    docker-buildx-plugin \
+    docker-compose-plugin && \
+    rm -rf /var/lib/apt/lists/*
+
 
 # Install devcontainer CLI
 RUN npm install -g @devcontainers/cli
 
-# Create the docker group with colima group id and non-root user
-# Set this to match the GID of docker group on host/Colima
-ARG DOCKER_GID=995
-
 # Change docker group GID if necessary, or create it if missing
-RUN if getent group docker ; then \
-      groupmod -g $DOCKER_GID docker; \
-    else \
-      groupadd -g $DOCKER_GID docker; \
-    fi && \
-    useradd coder \
+RUN useradd coder \
       --create-home \
       --shell=/bin/bash \
       --groups=sudo,docker \
